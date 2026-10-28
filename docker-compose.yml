@@ -1,1 +1,41 @@
+version: '3.8'
 
+services:
+  access-service:
+    build: ./access-service
+    ports:
+      - "8001:8000"
+    networks:
+      - apprm-net
+
+  project-service:
+    build: ./project-service
+    ports:
+      - "8002:8000"
+    networks:
+      - apprm-net
+
+  dependency-service:
+    build: ./dependency-service
+    ports:
+      - "8003:8000"
+    networks:
+      - apprm-net
+
+  risk-ai:
+    build: ./risk-ai
+    ports:
+      - "8004:8000"
+    networks:
+      - apprm-net
+
+  reports-service:
+    build: ./reports-service
+    ports:
+      - "8005:8000"
+    networks:
+      - apprm-net
+
+networks:
+  apprm-net:
+    driver: bridge
