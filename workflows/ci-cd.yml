@@ -38,4 +38,4 @@ jobs:
         push: true
         tags: |
           ghcr.io/${{ env.REPO_OWNER }}/${{ matrix.service }}:latest
-
+# trigger build
