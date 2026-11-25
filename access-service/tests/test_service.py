@@ -82,7 +82,7 @@ def fixtures():
     session_id = "9c1b4e2a-7712-4d3b-9a81-112233445566"
     active_user = UserEntity(
         user_id=user_id,
-        email="mariam.ali@aiu.edu.eg",
+        email="abdelrahman.hamed.2024@aiu.edu.eg",
         password_hash="$2b$12$R9h/cIPz0gi.URNNX3kh2OPST9/PgBkqquzi.Ss7KIUgO2t0jWMUW",
         status=AccountStatus.ACTIVE,
     )
@@ -102,7 +102,7 @@ def test_login_success_verifies_collaboration_mocks(fixtures):
     session_repo.create.return_value = session
 
     use_case = AuthUseCase(user_repo, session_repo, hasher, audit_service)
-    result = use_case.login("mariam.ali@aiu.edu.eg", "Secret@123")
+    result = use_case.login("abdelrahman.hamed.2024@aiu.edu.eg", "Secret@123")
 
     assert result["authenticated"] is True
     assert result["session_id"] == session.id
