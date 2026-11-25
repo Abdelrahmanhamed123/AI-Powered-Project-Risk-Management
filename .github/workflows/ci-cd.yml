@@ -16,6 +16,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -33,6 +35,16 @@ jobs:
           PYTHONPATH: access-service
         run: |
           python -m pytest access-service/tests --cov=access-service --cov-report=term-missing --cov-report=xml:coverage.xml
+
+      - name: SonarQube Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.projectKey=Abdelrahmanhamed123_AI-Powered-Project-Risk-Management
+            -Dsonar.organization=abdelrahmanhamed123
+            -Dsonar.python.coverage.reportPaths=coverage.xml
 
   build-and-push:
     needs: unit-tests
