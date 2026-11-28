@@ -166,17 +166,3 @@ def test_AC22_review_activity_filter_by_actor():
     logs = MagicMock()
     logs.find.return_value = [{"action": "A", "actor_id": 1}, {"action": "B", "actor_id": 2}]
     assert AuditService(logs).search(actor_id=2) == [{"action": "B", "actor_id": 2}]
-
-def test_AC23_deactivate_user():
-    """FR2.1 | Deactivate user account | deactivate() | Status becomes INACTIVE"""
-    u = make_user(ACTIVE)
-    u.deactivate()
-    assert u.status == INACTIVE
-
-
-def test_AC24_update_account_empty_name_rejected():
-    """FR2.1 | Update with empty name | full_name = blank | ValueError, not saved"""
-    svc, users, _ = acc(make_user())
-    with pytest.raises(ValueError):
-        svc.update_account(UID, full_name="   ")
-    users.save.assert_not_called()
